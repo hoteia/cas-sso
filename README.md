@@ -1,4 +1,4 @@
 cas-sso
 =======
 
-Hoteia CAS SSO project for : Qalingo project, Spring-Forum project, Rabble DM project
+Hoteia CAS SSO project for : Qalingo project, Rabble DM project
