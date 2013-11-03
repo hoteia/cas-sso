@@ -19,8 +19,6 @@
     <properties>
         <root.basedir>${project.parent.parent.basedir}</root.basedir>
 
-        <activemq-maven-plugin.version>5.9.0</activemq-maven-plugin.version>
-
         <activemq.version>5.7.0</activemq.version>
         <hibernate.version>4.2.6.Final</hibernate.version>
         <hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
@@ -28,14 +26,6 @@
 
     <build>
         <finalName>hoteia-cas-sso-api-core-jms</finalName>
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.activemq.tooling</groupId>
-                <artifactId>activemq-maven-plugin</artifactId>
-                <version>${activemq-maven-plugin.version}</version>
-            </plugin>
-        </plugins>
     </build>
 
     <dependencies>
