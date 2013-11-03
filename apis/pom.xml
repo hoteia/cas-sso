@@ -1,27 +1,27 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.hoteia.cas</groupId>
-		<artifactId>sso-cas</artifactId>
-		<version>0.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>sso-cas-apis</artifactId>
-	<packaging>pom</packaging>
-	<name>Hoteia SSO Project APIs Core *********************</name>
-	<description>Hoteia SSO Project APIs Core</description>
-	<url>http://www.hoteia.com</url>
-	<organization>
-		<name>Hoteia</name>
-		<url>http://www.hoteia.com</url>
-	</organization>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.hoteia.cas</groupId>
+        <artifactId>sso-cas</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>sso-cas-apis</artifactId>
+    <packaging>pom</packaging>
+    <name>Hoteia SSO Project APIs Core *********************</name>
+    <description>Hoteia SSO Project APIs Core</description>
+    <url>http://www.hoteia.com</url>
+    <organization>
+        <name>Hoteia</name>
+        <url>http://www.hoteia.com</url>
+    </organization>
 
-	<modules>
-		<module>api-core-common</module>
-		<module>api-core-jms</module>
-	</modules>
-	
-	<properties>
-		<root.basedir>${project.parent.basedir}</root.basedir>
-	</properties>
-	
+    <modules>
+        <module>api-core-common</module>
+        <module>api-core-jms</module>
+    </modules>
+
+    <properties>
+    </properties>
+
 </project>

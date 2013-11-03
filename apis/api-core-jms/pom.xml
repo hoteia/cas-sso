@@ -1,29 +1,82 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.hoteia.cas</groupId>
-		<artifactId>sso-cas-apis</artifactId>
-		<version>0.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>sso-cas-api-core-jms</artifactId>
-	<packaging>jar</packaging>
-	<name>Hoteia SSO Project APIs Core JMS *****************</name>
-	<description>Hoteia SSO Project APIs Core JMS</description>
-	<url>http://www.hoteia.com</url>
-	<organization>
-		<name>Hoteia</name>
-		<url>http://www.hoteia.com</url>
-	</organization>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.hoteia.cas</groupId>
+        <artifactId>sso-cas-apis</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>sso-cas-api-core-jms</artifactId>
+    <packaging>jar</packaging>
+    <name>Hoteia SSO Project APIs Core JMS *****************</name>
+    <description>Hoteia SSO Project APIs Core JMS</description>
+    <url>http://www.hoteia.com</url>
+    <organization>
+        <name>Hoteia</name>
+        <url>http://www.hoteia.com</url>
+    </organization>
 
-	<properties>
-		<root.basedir>${project.parent.parent.basedir}</root.basedir>
-	</properties>
+    <properties>
+        <activemq-maven-plugin.version>5.9.0</activemq-maven-plugin.version>
 
-	<build>
-		<finalName>hoteia-cas-sso-api-core-jms</finalName>
-	</build>
+        <activemq.version>5.7.0</activemq.version>
+        <hibernate.version>4.2.6.Final</hibernate.version>
+        <jackson.version>2.2.0</jackson.version>
+        <hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
+    </properties>
 
-	<dependencies>
+    <build>
+        <finalName>hoteia-cas-sso-api-core-jms</finalName>
 
-	</dependencies>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.activemq.tooling</groupId>
+                <artifactId>activemq-maven-plugin</artifactId>
+                <version>${activemq-maven-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hoteia.cas</groupId>
+            <artifactId>sso-cas-api-core-common</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+            <version>${activemq.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>${hibernate-jpa-2.0-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
 </project>
