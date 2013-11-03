@@ -17,11 +17,12 @@
     </organization>
 
     <properties>
+        <root.basedir>${project.parent.parent.basedir}</root.basedir>
+
         <activemq-maven-plugin.version>5.9.0</activemq-maven-plugin.version>
 
         <activemq.version>5.7.0</activemq.version>
         <hibernate.version>4.2.6.Final</hibernate.version>
-        <jackson.version>2.2.0</jackson.version>
         <hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
     </properties>
 
@@ -42,12 +43,6 @@
             <groupId>org.hoteia.cas</groupId>
             <artifactId>sso-cas-api-core-common</artifactId>
             <version>0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>

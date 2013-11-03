@@ -40,7 +40,6 @@
         <slf4j.version>1.6.6</slf4j.version>
         <spring.version>3.2.3.RELEASE</spring.version>
         <spring-data.version>1.4.1.RELEASE</spring-data.version>
-        <xbean-spring.version>3.14</xbean-spring.version>
     </properties>
 
     <modules>

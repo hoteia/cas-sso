@@ -16,13 +16,13 @@
 	</organization>
 
 	<properties>
+        <root.basedir>${project.parent.parent.basedir}</root.basedir>
         <jackson.version>2.2.0</jackson.version>
 	</properties>
 
 	<build>
 		<finalName>hoteia-cas-sso-api-core-common</finalName>
 	</build>
-
 
     <dependencies>
         <dependency>
