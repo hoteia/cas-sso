@@ -4,6 +4,14 @@ import java.io.Serializable;
 
 public class UserCredentialsPojo implements Serializable {
 
+    public UserCredentialsPojo() {
+    }
+
+    public UserCredentialsPojo(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     private String username;
     private String password;
 

@@ -1,12 +1,7 @@
 package org.hoteia.cas.account;
 
-import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.codehaus.jackson.map.ObjectMapper;
+import org.hoteia.cas.pojo.UserCredentialsPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
@@ -19,6 +14,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserService implements UserDetailsService {
 
@@ -57,10 +58,8 @@ public class UserService implements UserDetailsService {
     private void updateCas(Account account) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Map<String, String> userData = new HashMap<String, String>(2);
-            userData.put("username", account.getEmail());
-            userData.put("password", account.getPassword());
-            jmsTemplate.convertAndSend(queue, mapper.writeValueAsString(userData));
+            final UserCredentialsPojo userCredentialsPojo = new UserCredentialsPojo(account.getEmail(), account.getPassword());
+            jmsTemplate.convertAndSend(queue, mapper.writeValueAsString(userCredentialsPojo));
         } catch (IOException e) {
         }
     }

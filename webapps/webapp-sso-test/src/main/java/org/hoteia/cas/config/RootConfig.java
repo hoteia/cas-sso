@@ -13,7 +13,7 @@ public class RootConfig {
 	@Bean
 	public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
 		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-		ppc.setLocation(new ClassPathResource("/persistence.properties"));
+		ppc.setLocation(new ClassPathResource("/application.properties"));
 		return ppc;
 	}
 	
