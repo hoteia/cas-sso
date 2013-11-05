@@ -41,8 +41,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <import resource="classpath*:spring/activeMqJmsConfiguration.xml" />
-    <import resource="classpath*:spring/jpaConfiguration.xml" />
+    <import resource="classpath*:spring/activeMqJmsConfiguration.xml"/>
+    <import resource="classpath*:spring/jpaConfiguration.xml"/>
 
     <!--
            | Defines the security policy around authentication. Some alternative policies that ship with CAS:
@@ -52,6 +52,8 @@
            | * RequiredHandlerAuthenticationPolicy - specifies a handler that must authenticate its credential to pass
            -->
     <bean id="authenticationPolicy" class="org.jasig.cas.authentication.AnyAuthenticationPolicy"/>
+
+    <bean id="passwordEncoder" class="org.hoteia.cas.security.DefaultPasswordEncoder"/>
 
     <!--
        | The authentication manager defines security policy for authentication by specifying at a minimum
@@ -93,7 +95,8 @@
 
     <!-- Primary authentication handler -->
     <bean id="primaryAuthenticationHandler" class="org.jasig.cas.adaptors.jdbc.SearchModeSearchDatabaseAuthenticationHandler"
-          p:tableUsers="${users.table.name}" p:fieldUser="${users.field.username}" p:fieldPassword="${users.field.password}" p:dataSource-ref="dataSource" />
+          p:tableUsers="${users.table.name}" p:fieldUser="${users.field.username}" p:fieldPassword="${users.field.password}" p:dataSource-ref="dataSource"
+          p:passwordEncoder-ref="passwordEncoder" />
 
     <!--
          | Resolves a principal from a credential using an attribute repository that is configured to resolve
