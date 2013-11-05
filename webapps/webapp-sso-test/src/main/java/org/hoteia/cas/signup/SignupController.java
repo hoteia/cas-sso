@@ -17,9 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class SignupController {
 	
 	@Autowired
-	private AccountRepository accountRepository;
-	
-	@Autowired
 	private UserService userService;
 
 	@RequestMapping("signup")
