@@ -1,9 +1,5 @@
 package org.hoteia.cas.security;
 
-import javax.security.auth.login.FailedLoginException;
-import javax.validation.constraints.NotNull;
-import java.security.GeneralSecurityException;
-
 import org.jasig.cas.adaptors.jdbc.AbstractJdbcUsernamePasswordAuthenticationHandler;
 import org.jasig.cas.authentication.PreventedException;
 import org.jasig.cas.authentication.handler.PasswordEncoder;
@@ -11,6 +7,10 @@ import org.jasig.cas.authentication.principal.Principal;
 import org.jasig.cas.authentication.principal.SimplePrincipal;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.DataAccessException;
+
+import javax.security.auth.login.FailedLoginException;
+import javax.validation.constraints.NotNull;
+import java.security.GeneralSecurityException;
 
 public class SpringSecurityEncoderBasedSearchModeDatabaseAuthenticationHandler extends AbstractJdbcUsernamePasswordAuthenticationHandler
         implements InitializingBean {
