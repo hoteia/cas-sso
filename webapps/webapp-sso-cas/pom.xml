@@ -16,14 +16,116 @@
 	</organization>
 
 	<properties>
-		<root.basedir>${project.parent.parent.basedir}</root.basedir> 
-	</properties>
+        <root.basedir>${project.parent.parent.basedir}</root.basedir>
+        <cas.version>4.0.0-RC1</cas.version>
+        <xbean-spring.version>3.14</xbean-spring.version>
+    </properties>
 
 	<build>
 		<finalName>sso-cas</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/cas</path>
+                    <port>8090</port>
+                    <ajpPort>8009</ajpPort>
+                    <httpsPort>8443</httpsPort>
+                    <contextFile>src/test/resources/context.xml</contextFile>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+                <configuration>
+                    <workDirectory>target/overlay-war-folder</workDirectory>
+                    <overlays>
+                        <overlay>
+                            <groupId>org.jasig.cas</groupId>
+                            <artifactId>cas-server-webapp</artifactId>
+                            <excludes>
+                                <exclude>WEB-INF/lib/hibernate*.jar</exclude>
+                                <exclude>WEB-INF/lib/spring*.jar</exclude>
+                                <exclude>WEB-INF/lib/*slf4j*.jar</exclude>
+                                <exclude>WEB-INF/lib/*log4j*.jar</exclude>
+                                <exclude>WEB-INF/lib/jboss-logging*.jar</exclude>
+                                <exclude>WEB-INF/lib/jboss-transaction-api*.jar</exclude>
+                            </excludes>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
 	</build>
 
 	<dependencies>
+        <dependency>
+            <groupId>org.hoteia.cas</groupId>
+            <artifactId>sso-cas-api-core-jms</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-webapp</artifactId>
+            <version>${cas.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.xbean</groupId>
+            <artifactId>xbean-spring</artifactId>
+            <version>${xbean-spring.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-webapp-support</artifactId>
+            <version>${cas.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 	</dependencies>
 </project>

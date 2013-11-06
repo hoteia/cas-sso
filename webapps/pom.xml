@@ -1,27 +1,133 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.hoteia.cas</groupId>
-		<artifactId>sso-cas</artifactId>
-		<version>0.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>sso-cas-webapps</artifactId>
-	<packaging>pom</packaging>
-	<name>Hoteia SSO Project Webapps ***********************</name>
-	<description>Hoteia SSO Project Webapps	</description>
-	<url>http://www.hoteia.com</url>
-	<organization>
-		<name>Hoteia</name>
-		<url>http://www.hoteia.com</url>
-	</organization>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.hoteia.cas</groupId>
+        <artifactId>sso-cas</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>sso-cas-webapps</artifactId>
+    <packaging>pom</packaging>
+    <name>Hoteia SSO Project Webapps ***********************</name>
+    <description>Hoteia SSO Project Webapps</description>
+    <url>http://www.hoteia.com</url>
+    <organization>
+        <name>Hoteia</name>
+        <url>http://www.hoteia.com</url>
+    </organization>
 
-	<modules>
-		<module>webapp-sso-cas</module>
-		<module>webapp-sso-test</module>
-	</modules>
-	
-	<properties>
-		<root.basedir>${project.parent.parent.basedir}</root.basedir> 
-	</properties>
-	
+    <modules>
+        <module>webapp-sso-cas</module>
+        <module>webapp-sso-test</module>
+    </modules>
+
+    <properties>
+        <root.basedir>${project.parent.basedir}</root.basedir>
+
+        <keyStore.path>${java.home}/lib/security/tomcat</keyStore.path>
+        <cacerts.path>${java.home}/lib/security/cacerts</cacerts.path>
+        <cacerts.storepass>changeit</cacerts.storepass>
+
+        <gmaven-plugin.version>1.0</gmaven-plugin.version>
+        <tomcat7-maven-plugin.version>2.1</tomcat7-maven-plugin.version>
+        <keytool-maven-plugin.version>1.3</keytool-maven-plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>${tomcat7-maven-plugin.version}</version>
+                    <configuration>
+                        <keystoreFile>${keyStore.path}</keystoreFile>
+                        <keystorePass>password</keystorePass>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.h2database</groupId>
+                            <artifactId>h2</artifactId>
+                            <version>1.3.174</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.groovy.maven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>${gmaven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+                                project.properties["hostname"] = InetAddress.getLocalHost().getHostName()
+                                project.properties["state"] = Locale.getDefault().getCountry()
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>keytool-maven-plugin</artifactId>
+                <version>${keytool-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-key</id>
+                        <goals>
+                            <goal>generateKeyPair</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skipIfExist>true</skipIfExist>
+                            <dname>CN=${hostname}, OU=test, O=test, L=space, ST=universe, C=${state}</dname>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>import-key</id>
+                        <goals>
+                            <goal>importKeystore</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <keystore>${keyStore.path}</keystore>
+                    <storepass>password</storepass>
+                    <keypass>password</keypass>
+                    <keyalg>RSA</keyalg>
+                    <alias>tomcat</alias>
+
+                    <srckeystore>${keyStore.path}</srckeystore>
+                    <srcalias>tomcat</srcalias>
+                    <srcstorepass>password</srcstorepass>
+                    <destkeystore>${cacerts.path}</destkeystore>
+                    <destalias>tomcat</destalias>
+                    <deststorepass>${cacerts.storepass}</deststorepass>
+                    <noprompt>true</noprompt>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
