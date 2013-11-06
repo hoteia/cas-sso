@@ -40,6 +40,7 @@
         <slf4j.version>1.6.6</slf4j.version>
         <spring.version>3.2.3.RELEASE</spring.version>
         <spring-data.version>1.4.1.RELEASE</spring-data.version>
+		<jackson.version>2.1.0</jackson.version>
     </properties>
 
     <modules>
@@ -120,6 +121,31 @@
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${spring-data.version}</version>
             </dependency>
+			
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava-base</artifactId>
+				<version>r03</version>
+			</dependency>
+            
+			<!-- JACKSON Libs -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			
+			<!-- JACKSON Libs : JSON -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.jaxrs</groupId>
+				<artifactId>jackson-jaxrs-json-provider</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
 
             <dependency>
                 <groupId>org.slf4j</groupId>

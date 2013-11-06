@@ -65,6 +65,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jms</artifactId>
         </dependency>
+
         <!-- Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -81,6 +82,7 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${org.springframework.security-version}</version>
         </dependency>
+		
         <!-- Persistence -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -156,6 +158,28 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava-base</artifactId>
+		</dependency>
+		
+		<!-- JACKSON Libs -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		
+		<!-- JACKSON Libs : JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+		</dependency>
+            
         <!-- Servlet -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
@@ -177,6 +201,7 @@
     </dependencies>
 
     <build>
+		<finalName>sso-test</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
