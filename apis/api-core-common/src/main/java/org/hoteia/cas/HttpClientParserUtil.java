@@ -6,8 +6,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
@@ -80,7 +82,7 @@ public class HttpClientParserUtil {
     public static HttpResponse postDataToUrl(String url, Map<String, String> data) throws IOException {
         HttpPost post = new HttpPost(url);
         post.setEntity(new UrlEncodedFormEntity(toNameValuePairs(data), Charset.forName("UTF-8")));
-        return httpClient.get().execute(post);
+        return execute(post);
     }
 
     private static List<NameValuePair> toNameValuePairs(Map<String, String> data) {
@@ -91,4 +93,7 @@ public class HttpClientParserUtil {
         return params;
     }
 
+    public static HttpResponse execute(HttpUriRequest request) throws IOException {
+         return httpClient.get().execute(request);
+    }
 }
