@@ -6,10 +6,10 @@
         <artifactId>sso-cas-webapps</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>webapp-sso-test</artifactId>
+    <artifactId>webapp-sso-standalone-test</artifactId>
     <packaging>war</packaging>
-    <name>Hoteia SSO Project Webapp SSO Test ***************</name>
-    <description>Hoteia SSO Project Webapp SSO Test</description>
+    <name>Hoteia SSO Project Webapp SSO Standalone Test ****</name>
+    <description>Hoteia SSO Project Webapp SSO Standalone Test</description>
     <url>http://www.hoteia.com</url>
     <organization>
         <name>Hoteia</name>
@@ -47,7 +47,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${org.springframework-version}</version>
             <exclusions>
                 <!-- Exclude Commons Logging in favor of SLF4j -->
                 <exclusion>
@@ -59,7 +58,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

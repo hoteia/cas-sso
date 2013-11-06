@@ -18,7 +18,8 @@
 
     <modules>
         <module>webapp-sso-cas</module>
-        <module>webapp-sso-test</module>
+        <module>webapp-sso-redirect-test</module>
+        <module>webapp-sso-standalone-test</module>
     </modules>
 
     <properties>
