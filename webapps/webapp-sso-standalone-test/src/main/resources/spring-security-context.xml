@@ -11,6 +11,7 @@
         <sec:remember-me services-ref="rememberMeServices" key="remember-me-key"/>
         <sec:intercept-url pattern="/" access="permitAll"/>
         <sec:intercept-url pattern="/resources/**" access="permitAll"/>
+        <sec:intercept-url pattern="/signin" access="permitAll"/>
         <sec:intercept-url pattern="/signup" access="permitAll"/>
         <sec:intercept-url pattern="/default/**" access="permitAll"/>
         <sec:intercept-url pattern="/**" access="isAuthenticated()"/>
@@ -19,7 +20,7 @@
         <sec:custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER"/>
     </sec:http>
 
-    <bean id="casEntryPoint" class="org.springframework.security.cas.web.CasAuthenticationEntryPoint" p:loginUrl="https://${hostname}:8443/cas/login"
+    <bean id="casEntryPoint" class="org.springframework.security.cas.web.CasAuthenticationEntryPoint" p:loginUrl="${cas.login.url}"
           p:serviceProperties-ref="serviceProperties"/>
 
     <bean id="casFilter" class="org.springframework.security.cas.web.CasAuthenticationFilter" p:authenticationManager-ref="authenticationManager"
@@ -28,7 +29,7 @@
     <bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/>
 
     <bean id="requestSingleLogoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter" p:filterProcessesUrl="/j_spring_cas_security_logout">
-        <constructor-arg value="https://${hostname}:8443/cas/logout"/>
+        <constructor-arg value="${cas.logout.url}"/>
         <constructor-arg>
             <bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
         </constructor-arg>
@@ -47,12 +48,12 @@
         <constructor-arg ref="userService"/>
     </bean>
 
-    <bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties" p:service="https://${hostname}:9443/webapp-sso-standalone-test/j_spring_cas_security_check"
+    <bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties" p:service="${cas.service.url}"
           p:sendRenew="false"/>
 
     <bean id="ticketValidator" class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator" p:proxyGrantingTicketStorage-ref="proxyGrantingTicketStorage"
-          p:proxyCallbackUrl="https://${hostname}:9443/webapp-sso-standalone-test/j_spring_cas_security_receptor">
-        <constructor-arg index="0" value="https://${hostname}:8443/cas"/>
+          p:proxyCallbackUrl="${cas.proxyCallback.url}">
+        <constructor-arg index="0" value="${cas.url}"/>
     </bean>
 
     <bean id="proxyGrantingTicketStorage" class="org.jasig.cas.client.proxy.ProxyGrantingTicketStorageImpl"/>

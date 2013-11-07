@@ -26,7 +26,7 @@ public class CasRestfulClient {
         this.service = service;
     }
 
-    public String getServiceTicket(String serviceTicketGrantingUrl, String username, String password) throws IOException {
+    public String getServiceTicket(String serviceTicketGrantingUrl) throws IOException {
         Map<String, String> data = ImmutableMap.of("service", service);
         HttpResponse response = HttpClientParserUtil.postDataToUrl(serviceTicketGrantingUrl, data);
 
@@ -39,6 +39,11 @@ public class CasRestfulClient {
 
     private String extractServiceTicket(HttpResponse response) throws IOException {
         return CharStreams.toString(new InputStreamReader(response.getEntity().getContent()));
+    }
+
+    public String getTicketGrantingTicket(String username, String password) throws IOException {
+        String url = getServiceTicketGrantingUrl(username, password);
+        return extractTicketGrantingTicketFromUrl(url);
     }
 
     public String getServiceTicketGrantingUrl(String username, String password) throws IOException {
@@ -84,7 +89,7 @@ public class CasRestfulClient {
     public static void main(String... args) throws IOException {
         CasRestfulClient client = new CasRestfulClient("https://hal9000:8443", "https://HAL9000:9443/webapp-sso-redirect-test/j_spring_cas_security_check");
         String serviceTicketGrantingUrl = client.getServiceTicketGrantingUrl("casuser", "Mellon");
-        client.getServiceTicket(serviceTicketGrantingUrl, "casuser", "Mellon");
+        client.getServiceTicket(serviceTicketGrantingUrl);
         client.logout(client.extractTicketGrantingTicketFromUrl(serviceTicketGrantingUrl));
     }
 }
