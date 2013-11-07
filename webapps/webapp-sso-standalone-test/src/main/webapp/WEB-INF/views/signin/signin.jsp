@@ -43,7 +43,7 @@
 
         <input type="hidden" name="auto" value="true" />
         <input type="hidden" name="service" value='<c:out value="${casServiceUrl}"/>' />
-        <input type="hidden" name="error-redirect" value='<s:url value="/signin?error=loginError"/>'/>
+        <input type="hidden" name="redirect" value='<c:out value="${casRedirectUrl}"/>'/>
         <input type="hidden" name="loginTicket" value='<%= request.getParameter("loginTicket") %>' />
     </fieldset>
 </form>

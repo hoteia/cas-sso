@@ -5,8 +5,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-
-    <sec:http entry-point-ref="casEntryPoint" use-expressions="true">
+    <sec:http use-expressions="true">
+        <sec:form-login login-page="/signin" />
         <sec:logout logout-success-url="/signin"/>
         <sec:remember-me services-ref="rememberMeServices" key="remember-me-key"/>
         <sec:intercept-url pattern="/" access="permitAll"/>
