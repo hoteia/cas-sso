@@ -31,17 +31,15 @@
 
     boolean hasErrors = false;
 
-    try {
-        final Enumeration<String> attributeNames = request.getAttributeNames();
-        while (attributeNames.hasMoreElements()) {
-            String attributeName = attributeNames.nextElement();
-            if (attributeName.startsWith(BindingResult.MODEL_KEY_PREFIX)) {
-                System.out.println(request.getAttribute(attributeName));
-                final BindingModel bindingModel = (BindingModel) request.getAttribute(attributeName);
-                hasErrors = bindingModel.hasErrors();
-            }
+    final Enumeration<String> attributeNames = request.getAttributeNames();
+    while (attributeNames.hasMoreElements()) {
+        String attributeName = attributeNames.nextElement();
+        if (attributeName.startsWith(BindingResult.MODEL_KEY_PREFIX)) {
+            final BindingModel bindingModel = (BindingModel) request.getAttribute(attributeName);
+            //System.out.println(bindingModel + "Error count = " + bindingModel.getErrorCount());
+            hasErrors = hasErrors || bindingModel.hasErrors();
         }
-    } catch(Exception ex) {}
+    }
 
     if ("true".equals(auto)) {
 %>
