@@ -10,7 +10,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 public class SigninController {
 
-    @Value("${cas.login.url}")
+    @Value("${cas.url}/login")
     private String casLoginUrl;
 
     @Value("${cas.service.url}")

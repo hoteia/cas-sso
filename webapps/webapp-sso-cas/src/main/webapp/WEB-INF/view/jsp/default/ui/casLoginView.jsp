@@ -71,6 +71,8 @@
 </body>
 </html>
 <%
+} else if (StringUtils.isNotBlank(redirect)) {
+    response.sendRedirect(redirect);
 } else if (hasErrors && (StringUtils.isNotBlank(savedRedirect) || StringUtils.isNotBlank(redirect))) {
     String baseRedirect = StringUtils.defaultIfEmpty(redirect, savedRedirect);
     String redirectUrl = baseRedirect + (baseRedirect.contains("?") ? "&" : "?") + "error=loginError";
