@@ -1,28 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.hoteia.cas</groupId>
-		<artifactId>sso-cas-webapps</artifactId>
-		<version>0.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>webapp-sso-cas</artifactId>
-	<packaging>war</packaging>
-	<name>Hoteia SSO Project Webapp SSO CAS ****************</name>
-	<description>Hoteia SSO Project Webapp SSO CAS</description>
-	<url>http://www.hoteia.com</url>
-	<organization>
-		<name>Hoteia</name>
-		<url>http://www.hoteia.com</url>
-	</organization>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.hoteia.cas</groupId>
+        <artifactId>sso-cas-webapps</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>webapp-sso-cas</artifactId>
+    <packaging>war</packaging>
+    <name>Hoteia SSO Project Webapp SSO CAS ****************</name>
+    <description>Hoteia SSO Project Webapp SSO CAS</description>
+    <url>http://www.hoteia.com</url>
+    <organization>
+        <name>Hoteia</name>
+        <url>http://www.hoteia.com</url>
+    </organization>
 
-	<properties>
+    <properties>
         <root.basedir>${project.parent.parent.basedir}</root.basedir>
         <cas.version>4.0.0-RC1</cas.version>
         <xbean-spring.version>3.14</xbean-spring.version>
     </properties>
 
-	<build>
-		<finalName>sso-cas</finalName>
+    <build>
+        <finalName>sso-cas</finalName>
 
         <plugins>
             <plugin>
@@ -60,9 +61,19 @@
                 </configuration>
             </plugin>
         </plugins>
-	</build>
+    </build>
 
-	<dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-asm</artifactId>
+                <version>3.1.4.RELEASE</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
         <dependency>
             <groupId>org.hoteia.cas</groupId>
             <artifactId>sso-cas-api-core-jms</artifactId>
@@ -74,6 +85,18 @@
             <artifactId>cas-server-webapp</artifactId>
             <version>${cas.version}</version>
             <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-integration-restlet</artifactId>
+            <version>${cas.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-asm</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -127,5 +150,5 @@
                 </exclusion>
             </exclusions>
         </dependency>
-	</dependencies>
+    </dependencies>
 </project>
