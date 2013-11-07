@@ -16,9 +16,13 @@ public class SigninController {
     @Value("${cas.service.url}")
     private String casServiceUrl;
 
+    @Value("${cas.redirect.url}")
+    private String casRedirectUrl;
+
     @RequestMapping(value = "signin", method = GET)
     public void signin(ModelMap model) {
         model.addAttribute("casLoginUrl", casLoginUrl);
         model.addAttribute("casServiceUrl", casServiceUrl);
+        model.addAttribute("casRedirectUrl", casRedirectUrl);
     }
 }

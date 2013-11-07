@@ -25,10 +25,14 @@
 --%>
 
 <%
+
     final String redirect = request.getParameter("redirect");
+    if (StringUtils.isNotBlank(redirect)) {
+        request.getSession().setAttribute("redirect", redirect);
+    }
+
     final String auto = request.getParameter("auto");
     final String savedRedirect = (String) request.getSession().getAttribute("redirect");
-
     boolean hasErrors = false;
 
     final Enumeration<String> attributeNames = request.getAttributeNames();
@@ -68,11 +72,10 @@
 </html>
 <%
 } else if (StringUtils.isNotBlank(redirect)) {
-    String redirectUrl = redirect + (redirect.contains("?") ? "&" : "?") + "loginTicket=" + request.getAttribute("loginTicket");
-    request.getSession().setAttribute("redirect", redirectUrl);
-    response.sendRedirect(redirectUrl);
-} else if (hasErrors &&StringUtils.isNotBlank(savedRedirect)) {
-    String redirectUrl = savedRedirect + (savedRedirect.contains("?") ? "&" : "?") + "error=loginError";
+    response.sendRedirect(redirect);
+} else if (hasErrors && (StringUtils.isNotBlank(savedRedirect) || StringUtils.isNotBlank(redirect))) {
+    String baseRedirect = StringUtils.defaultIfEmpty(redirect, savedRedirect);
+    String redirectUrl = baseRedirect + (baseRedirect.contains("?") ? "&" : "?") + "error=loginError";
     response.sendRedirect(redirectUrl);
 } else {
 %>
