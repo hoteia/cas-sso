@@ -14,6 +14,6 @@ public class JmsExceptionListener implements ExceptionListener {
 
     @Override
     public void onException(JMSException e) {
-        logger.error("Unexpected error while processing JMS message", e);
+        logger.error("Unexpected error while processing JMS message");
     }
 }
